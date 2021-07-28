@@ -2,10 +2,12 @@
 <resources>
     <!--    TODO: Fonts and sizes-->
     <color name="text_teal">#FF03DAC5</color>
+    <color name="text_NCR">#40D020</color>
     <dimen name="text_size_medium">32sp</dimen>
     <dimen name="text_size_large">36sp</dimen>
     <dimen name="text_size_extra_large">42sp</dimen>
     <dimen name="text_size_ultra">48sp</dimen>
-    <dimen name="text_size_über">64sp</dimen>
+    <dimen name="text_size_über">100sp</dimen>
     <dimen name="text_size_regular">24sp</dimen>
+
 </resources>

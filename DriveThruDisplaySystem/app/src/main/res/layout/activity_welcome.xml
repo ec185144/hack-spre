@@ -14,29 +14,28 @@
         android:layout_marginTop="150dp"
         android:layout_marginEnd="340dp"
         android:layout_marginBottom="150dp"
-        android:elevation="0dp"
         android:background="@drawable/circle"
+        android:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="488dp"
         android:layout_height="413dp"
-        android:layout_marginTop="241dp"
         android:text="Scan or Start Order"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
-        android:textSize="100sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        android:textSize="@dimen/text_size_über"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <Button
         android:id="@+id/scanBtn"

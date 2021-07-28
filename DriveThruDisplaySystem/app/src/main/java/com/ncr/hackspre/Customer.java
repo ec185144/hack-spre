@@ -1,7 +1,10 @@
 package com.ncr.hackspre;
 
-public class Customer {
+import java.io.Serializable;
 
+public class Customer implements Serializable {
+
+    private static final long serialID=1L;
     String memberID;
     String name;
     String email;
@@ -50,8 +53,8 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public LoyaltyRewards getRewards() {
-        return rewards;
+    public int getRewards() {
+        return rewards.getRewards();
     }
 
     public void setRewards(final LoyaltyRewards rewards) {

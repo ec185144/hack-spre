@@ -1,7 +1,10 @@
 package com.ncr.hackspre;
 
-public class LoyaltyRewards {
+import java.io.Serializable;
 
+public class LoyaltyRewards implements Serializable {
+
+    private static final long serialID = 2L;
     String rewardsID;
     int rewards;
 

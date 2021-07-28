@@ -60,12 +60,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the customer
         Intent intent = getIntent();
-        Customer customer = intent.getParcelableExtra(ScannerActivity.EXTRA_CUSTOMER);
+        Bundle customerData = intent.getExtras();
+        Customer customer = (Customer) customerData.getSerializable("data");
 
         // Capture the layout's TextView and set the customer name and loyalty points as its text
         TextView customerName = findViewById(R.id.userNameGreeting);
         TextView loyaltyPoints = findViewById(R.id.loyaltyPointsText);
-        textView.setText("Hello, " + customer.getName() + "!");
+        customerName.setText("Hello, " + customer.getName() + "!");
         loyaltyPoints.setText("You have " + customer.getRewards() + " points!");    }
 
     /*Method to generate List of data using RecyclerView with custom adapter*/

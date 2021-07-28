@@ -14,10 +14,12 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,8 +35,13 @@ public class ScannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
+        // Hide action bar
+        View view = getWindow().getDecorView();
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        ActionBar b = getSupportActionBar();
+        b.hide();
 
-        dbvScanner = (DecoratedBarcodeView) findViewById(R.id.cameraView);
+        dbvScanner = findViewById(R.id.cameraView);
 
         // get camera permission
         requestPermission();
@@ -66,7 +73,7 @@ public class ScannerActivity extends AppCompatActivity {
      *
      */
     public void onBarcode(View view) {
-        EditText editText = (EditText) findViewById(R.id.barcodeText);
+        EditText editText = findViewById(R.id.barcodeText);
         String barcode = editText.getText().toString();
         done(barcode, "Barcode");
     }
@@ -135,7 +142,9 @@ public class ScannerActivity extends AppCompatActivity {
 
     public void openOrderScreen(Customer customer) {
         Intent intent = new Intent(ScannerActivity.this, MainActivity.class);
-        intent.putExtra(EXTRA_CUSTOMER, (Parcelable) customer);
+        Bundle customerData = new Bundle();
+        customerData.putSerializable("data", customer);
+        intent.putExtras(customerData);
         startActivity(intent);
     }
 
