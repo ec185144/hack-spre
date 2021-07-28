@@ -47,10 +47,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(final Call<List<RetroPosts>> call,
                                    final Response<List<RetroPosts>> response) {
                 generateDataList(response.body());
-                for(RetroPosts p: response.body()){
-                    Log.d("RESP: ", p.getTitle());
-                }
-
             }
 
             @Override

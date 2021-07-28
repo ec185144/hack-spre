@@ -53,7 +53,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     public PostsViewHolder onCreateViewHolder(@NonNull @NotNull final ViewGroup parent,
                                               final int viewType) {
 
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.post_row, parent, false);
         return new PostsViewHolder(view);
     }
