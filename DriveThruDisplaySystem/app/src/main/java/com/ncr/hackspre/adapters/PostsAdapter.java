@@ -32,13 +32,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         public final View view;
 
         TextView postTitle;
+        TextView itemCost;
+        TextView itemNumber;
 
         PostsViewHolder(View postView) {
             super(postView);
 
             view = postView;
 
-            postTitle = view.findViewById(R.id.postTitle);
+            postTitle = view.findViewById(R.id.item);
+            itemCost = view.findViewById(R.id.itemCost);
+            itemNumber = view.findViewById(R.id.itemNumber);
         }
 
     }
@@ -58,6 +62,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     public void onBindViewHolder(@NonNull @NotNull final PostsAdapter.PostsViewHolder holder,
                                  final int position) {
         holder.postTitle.setText(postData.get(position).getBody());
+        holder.itemCost.setText(String.valueOf(postData.get(position).getUserID()));
+        holder.itemNumber.setText(String.valueOf(position+1));
 
         // Picasso for images
         //        Picasso.Builder builder = new Picasso.Builder(context);
