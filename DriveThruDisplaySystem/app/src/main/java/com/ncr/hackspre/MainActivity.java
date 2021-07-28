@@ -1,10 +1,5 @@
 package com.ncr.hackspre;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
 import com.ncr.hackspre.adapters.PostsAdapter;
 import com.ncr.hackspre.endpoints.GetPosts;
 import com.ncr.hackspre.model.RetroPosts;
@@ -12,7 +7,15 @@ import com.ncr.hackspre.net.RetroClient;
 
 import java.util.List;
 
+import android.widget.TextView;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.content.Intent;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
@@ -30,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Hide action bar
+        View view = getWindow().getDecorView();
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        ActionBar b = getSupportActionBar();
+        b.hide();
+
+
+
         GetPosts posts = RetroClient.getRetrofitInstance().create(GetPosts.class);
         Call<List<RetroPosts>> call = posts.getAllPosts();
 
@@ -38,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(final Call<List<RetroPosts>> call,
                                    final Response<List<RetroPosts>> response) {
                 generateDataList(response.body());
-                for (RetroPosts p : response.body()) {
-                    Log.d("RESP: ", p.getTitle());
-                }
 
             }
 
@@ -54,16 +62,20 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Customer customer = intent.getParcelableExtra(ScannerActivity.EXTRA_CUSTOMER);
 
-        // Capture the layout's TextView and set the customer names as its text
-        TextView textView = findViewById(R.id.greeting);
-        textView.setText("Hello, " + customer.getName() + "!/nYou have " + customer.getRewards().getRewards() + " points!");
-    }
+        // Capture the layout's TextView and set the customer name and loyalty points as its text
+        TextView customerName = findViewById(R.id.userNameGreeting);
+        TextView loyaltyPoints = findViewById(R.id.loyaltyPointsText);
+        textView.setText("Hello, " + customer.getName() + "!");
+        loyaltyPoints.setText("You have " + customer.getRewards() + " points!");    }
 
     /*Method to generate List of data using RecyclerView with custom adapter*/
     private void generateDataList(List<RetroPosts> photoList) {
         recyclerView = findViewById(R.id.recyclerView);
-        adapter = new PostsAdapter(this, photoList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        adapter = new PostsAdapter(this,photoList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+            layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }

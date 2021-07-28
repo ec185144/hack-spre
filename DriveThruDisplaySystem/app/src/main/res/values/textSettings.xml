@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    TODO: Fonts and sizes-->
+    <color name="text_teal">#FF03DAC5</color>
+    <dimen name="text_size_medium">32sp</dimen>
+    <dimen name="text_size_large">36sp</dimen>
+    <dimen name="text_size_extra_large">42sp</dimen>
+    <dimen name="text_size_ultra">48sp</dimen>
+    <dimen name="text_size_über">64sp</dimen>
+    <dimen name="text_size_regular">24sp</dimen>
+</resources>
