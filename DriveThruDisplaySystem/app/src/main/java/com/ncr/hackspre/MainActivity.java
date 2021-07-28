@@ -1,5 +1,18 @@
 package com.ncr.hackspre;
 
+import com.ncr.hackspre.adapters.PostsAdapter;
+import com.ncr.hackspre.endpoints.GetPosts;
+import com.ncr.hackspre.model.RetroPosts;
+import com.ncr.hackspre.net.RetroClient;
+
+import java.util.List;
+
+import android.widget.TextView;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.content.Intent;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -8,17 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
-import com.ncr.hackspre.adapters.PostsAdapter;
-import com.ncr.hackspre.endpoints.GetPosts;
-import com.ncr.hackspre.model.RetroPosts;
-import com.ncr.hackspre.net.RetroClient;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(final Call<List<RetroPosts>> call,
                                    final Response<List<RetroPosts>> response) {
                 generateDataList(response.body());
+
             }
 
             @Override
@@ -54,7 +57,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
+
+        // Get the Intent that started this activity and extract the customer
+        Intent intent = getIntent();
+        Bundle customerData = intent.getExtras();
+        Customer customer = (Customer) customerData.getSerializable("data");
+
+        // Capture the layout's TextView and set the customer name and loyalty points as its text
+        TextView customerName = findViewById(R.id.userNameGreeting);
+        TextView loyaltyPoints = findViewById(R.id.loyaltyPointsText);
+        customerName.setText("Hello, " + customer.getName() + "!");
+        loyaltyPoints.setText("You have " + customer.getRewards() + " points!");    }
+
     /*Method to generate List of data using RecyclerView with custom adapter*/
     private void generateDataList(List<RetroPosts> photoList) {
         recyclerView = findViewById(R.id.recyclerView);
