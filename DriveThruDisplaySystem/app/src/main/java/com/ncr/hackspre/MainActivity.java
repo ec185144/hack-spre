@@ -1,6 +1,8 @@
 package com.ncr.hackspre;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
@@ -9,6 +11,7 @@ import retrofit2.Response;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.ncr.hackspre.adapters.PostsAdapter;
 import com.ncr.hackspre.endpoints.GetPosts;
@@ -27,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Hide action bar
+        View view = getWindow().getDecorView();
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        ActionBar b = getSupportActionBar();
+        b.hide();
+
+
 
         GetPosts posts = RetroClient.getRetrofitInstance().create(GetPosts.class);
         Call<List<RetroPosts>> call = posts.getAllPosts();
@@ -52,7 +63,10 @@ public class MainActivity extends AppCompatActivity {
     private void generateDataList(List<RetroPosts> photoList) {
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new PostsAdapter(this,photoList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+            layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
