@@ -9,8 +9,8 @@
         android:id="@+id/postTitle"
         style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:lines="2"
+        android:layout_height="wrap_content"
+        android:lines="1"
         android:text="title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
